@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DocumentDetail } from "@/components/admin/document-detail";
 import { FaqManager } from "@/components/admin/faq-manager";
 import { QuizManager } from "@/components/admin/quiz-manager";
+import { AiReviewPanel } from "@/components/admin/ai-review-panel";
 import { getDocumentById } from "@/lib/actions/documents";
 import { getFaqsByDocument } from "@/lib/actions/faqs";
 import { getQuizzesByDocument } from "@/lib/actions/quizzes";
@@ -33,6 +34,8 @@ export default async function AdminDocDetailPage({ params }: Props) {
   return (
     <div className="space-y-6">
       <DocumentDetail document={doc} pdfUrl={pdfUrl} />
+
+      <AiReviewPanel document={doc} />
 
       <Tabs defaultValue="faqs">
         <TabsList>
