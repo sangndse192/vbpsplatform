@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { LogOut, UserCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { NotificationBell } from "./notification-bell";
+import { SearchBar } from "./search-bar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,7 +41,11 @@ export function Header({ userName, userEmail }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b bg-white px-4 md:px-6">
       <div className="md:hidden w-10" /> {/* Spacer for mobile menu button */}
-      <div className="flex-1" />
+      <div className="flex-1 flex justify-center px-4">
+        <SearchBar />
+      </div>
+      <div className="flex items-center gap-2">
+      <NotificationBell />
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
@@ -67,6 +73,7 @@ export function Header({ userName, userEmail }: HeaderProps) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      </div>
     </header>
   );
 }
