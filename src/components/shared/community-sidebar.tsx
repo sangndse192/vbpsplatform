@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, FileText, TrendingUp } from "lucide-react";
 import { getCommunityStats, getPopularTags } from "@/lib/actions/posts";
+import { AmbassadorLeaderboard } from "./ambassador-leaderboard";
 
 type Props = {
   onTagClick?: (tag: string) => void;
@@ -47,6 +48,9 @@ export function CommunitySidebar({ onTagClick }: Props) {
           </div>
         </CardContent>
       </Card>
+
+      {/* Ambassador Leaderboard */}
+      <AmbassadorLeaderboard />
 
       {/* Popular Tags */}
       {tags.length > 0 && (
