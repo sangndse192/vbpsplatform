@@ -4,6 +4,7 @@ import { DocumentDetail } from "@/components/admin/document-detail";
 import { FaqManager } from "@/components/admin/faq-manager";
 import { QuizManager } from "@/components/admin/quiz-manager";
 import { AiReviewPanel } from "@/components/admin/ai-review-panel";
+import { DocumentAnalytics } from "@/components/admin/document-analytics";
 import { getDocumentById } from "@/lib/actions/documents";
 import { getFaqsByDocument } from "@/lib/actions/faqs";
 import { getQuizzesByDocument } from "@/lib/actions/quizzes";
@@ -35,7 +36,12 @@ export default async function AdminDocDetailPage({ params }: Props) {
     <div className="space-y-6">
       <DocumentDetail document={doc} pdfUrl={pdfUrl} />
 
-      <AiReviewPanel document={doc} />
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <AiReviewPanel document={doc} />
+        </div>
+        <DocumentAnalytics documentId={id} />
+      </div>
 
       <Tabs defaultValue="faqs">
         <TabsList>

@@ -5,22 +5,34 @@ import { requireAuth } from "./require-auth";
 export async function trackView(documentId: string) {
   const { supabase, user } = await requireAuth();
 
-  // Deduplicate: one view per user per doc per day
-  const today = new Date().toISOString().slice(0, 10);
-  const { count } = await supabase
-    .from("document_views")
-    .select("id", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .eq("document_id", documentId)
-    .gte("viewed_at", `${today}T00:00:00Z`);
+  // Get user's branch name for analytics denormalization
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("branch_id")
+    .eq("id", user.id)
+    .single();
 
-  if ((count ?? 0) > 0) return { success: true, deduplicated: true };
+  let branchName: string | null = null;
+  if (profile?.branch_id) {
+    const { data: branch } = await supabase
+      .from("branches")
+      .select("name")
+      .eq("id", profile.branch_id)
+      .single();
+    branchName = branch?.name ?? null;
+  }
 
+  // Insert with ON CONFLICT DO NOTHING via unique daily index
   const { error } = await supabase
     .from("document_views")
-    .insert({ user_id: user.id, document_id: documentId });
+    .insert({
+      user_id: user.id,
+      document_id: documentId,
+      branch: branchName,
+    });
 
-  if (error) return { error: error.message };
+  // Duplicate key error means already tracked today — not an error
+  if (error && !error.message.includes("duplicate")) return { error: error.message };
   return { success: true };
 }
 
