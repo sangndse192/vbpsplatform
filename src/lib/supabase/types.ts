@@ -48,3 +48,57 @@ export type Document = {
   created_at: string;
   updated_at: string;
 };
+
+export type DocumentFaq = {
+  id: string;
+  document_id: string;
+  question: string;
+  answer: string;
+  sort_order: number;
+  created_at: string;
+};
+
+export type DocumentQuiz = {
+  id: string;
+  document_id: string;
+  question: string;
+  options: string[];
+  correct_answer: number;
+  explanation: string | null;
+  sort_order: number;
+  created_at: string;
+};
+
+export type QuizAttempt = {
+  id: string;
+  user_id: string;
+  document_id: string;
+  answers: Record<string, number>;
+  score: number;
+  total: number;
+  completed_at: string;
+};
+
+export type Comment = {
+  id: string;
+  document_id: string;
+  user_id: string;
+  content: string;
+  replied_by: string | null;
+  replied_at: string | null;
+  reply_content: string | null;
+  created_at: string;
+};
+
+export type UserProgress = {
+  id: string;
+  user_id: string;
+  document_id: string;
+  has_read: boolean;
+  viewed_faq: boolean;
+  sent_feedback: boolean;
+  quiz_score: number | null;
+  quiz_passed: boolean;
+  completed_at: string | null;
+  updated_at: string;
+};
