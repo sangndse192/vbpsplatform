@@ -18,7 +18,7 @@ export async function createPost(input: {
     .from("community_posts")
     .insert({
       user_id: user.id,
-      title: input.title?.trim() || null,
+      title: input.title?.trim() || "",
       content,
       images: input.images ?? [],
       tags: input.tags ?? [],
