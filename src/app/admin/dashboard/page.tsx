@@ -12,7 +12,7 @@ export default async function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <h1 className="text-[17px] font-extrabold text-slate-800">Dashboard Tổng quan</h1>
 
       <DashboardStatCards
         totalDocs={stats.totalDocs}

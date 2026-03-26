@@ -9,7 +9,7 @@ export function AmbassadorBadge({ variant = "inline" }: Props) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-sm font-medium text-amber-700 border border-amber-200">
         <Star className="h-4 w-4 fill-amber-500 text-amber-500" />
-        Dai su
+        Đại sứ
       </span>
     );
   }

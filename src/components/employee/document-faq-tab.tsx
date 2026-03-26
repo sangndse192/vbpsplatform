@@ -54,7 +54,7 @@ export function DocumentFaqTab({ documentId }: Props) {
     return (
       <div className="flex flex-col items-center gap-2 py-12 text-muted-foreground">
         <HelpCircle className="h-8 w-8" />
-        <p>Chua co FAQ cho van ban nay</p>
+        <p>Chưa có FAQ cho văn bản này</p>
       </div>
     );
   }

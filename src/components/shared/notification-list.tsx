@@ -30,18 +30,18 @@ const typeIcons: Record<string, LucideIcon> = {
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const mins = Math.floor(diff / 60_000);
-  if (mins < 1) return "Vua xong";
-  if (mins < 60) return `${mins}m`;
+  if (mins < 1) return "Vừa xong";
+  if (mins < 60) return `${mins} phút`;
   const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h`;
-  return `${Math.floor(hours / 24)}d`;
+  if (hours < 24) return `${hours} giờ`;
+  return `${Math.floor(hours / 24)} ngày`;
 }
 
 export function NotificationList({ notifications, onMarkRead }: Props) {
   if (notifications.length === 0) {
     return (
       <div className="p-6 text-center text-sm text-muted-foreground">
-        Khong co thong bao
+        Không có thông báo
       </div>
     );
   }

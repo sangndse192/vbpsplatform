@@ -39,16 +39,16 @@ export function QuizResults({
           <h3 className="text-2xl font-bold">
             {score}/{total}
           </h3>
-          <p className="text-sm text-muted-foreground">{percentage}% chinh xac</p>
+          <p className="text-sm text-muted-foreground">{percentage}% chính xác</p>
           <p className={`text-sm font-medium ${passed ? "text-green-700" : "text-red-600"}`}>
-            {passed ? "Dat yeu cau!" : "Chua dat (can >= 70%)"}
+            {passed ? "Đạt yêu cầu!" : "Chưa đạt (cần >= 70%)"}
           </p>
         </CardContent>
       </Card>
 
       {/* Answer Review */}
       <div className="space-y-3">
-        <h4 className="text-sm font-medium">Xem lai cau tra loi</h4>
+        <h4 className="text-sm font-medium">Xem lại câu trả lời</h4>
         {quizzes.map((quiz, i) => {
           const userAnswer = answers[quiz.id] ?? -1;
           const isCorrect = userAnswer === quiz.correct_answer;
@@ -63,7 +63,7 @@ export function QuizResults({
                     <XCircle className="h-4 w-4 mt-0.5 text-red-500 shrink-0" />
                   )}
                   <p className="text-sm font-medium">
-                    Cau {i + 1}: {quiz.question}
+                    Câu {i + 1}: {quiz.question}
                   </p>
                 </div>
                 <div className="pl-6 space-y-1">

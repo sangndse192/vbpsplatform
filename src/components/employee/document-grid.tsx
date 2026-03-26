@@ -3,10 +3,9 @@
 import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
 import { EmployeeDocumentCard } from "./document-card";
 import { NotificationBanner } from "./notification-banner";
-import type { Document, DocType, UserProgress } from "@/lib/supabase/types";
+import type { Document, UserProgress } from "@/lib/supabase/types";
 
 type DocumentGridProps = {
   documents: Document[];
@@ -15,13 +14,13 @@ type DocumentGridProps = {
 };
 
 const typeOptions: { value: string; label: string }[] = [
-  { value: "all", label: "Tat ca loai" },
-  { value: "policy", label: "Chinh sach" },
-  { value: "regulation", label: "Quy dinh" },
-  { value: "guideline", label: "Huong dan" },
-  { value: "circular", label: "Thong tu" },
-  { value: "decision", label: "Quyet dinh" },
-  { value: "other", label: "Khac" },
+  { value: "all",        label: "Tất cả loại" },
+  { value: "policy",     label: "Chính sách" },
+  { value: "regulation", label: "Quy định" },
+  { value: "guideline",  label: "Hướng dẫn" },
+  { value: "circular",   label: "Thông tư" },
+  { value: "decision",   label: "Quyết định" },
+  { value: "other",      label: "Khác" },
 ];
 
 export function DocumentGrid({ documents, progressMap, newDocCount }: DocumentGridProps) {
@@ -45,11 +44,12 @@ export function DocumentGrid({ documents, progressMap, newDocCount }: DocumentGr
     <div className="space-y-4">
       <NotificationBanner newDocCount={newDocCount} />
 
+      {/* Search + filter */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Tim kiem van ban..."
+            placeholder="Tìm kiếm văn bản..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
@@ -70,10 +70,10 @@ export function DocumentGrid({ documents, progressMap, newDocCount }: DocumentGr
 
       {filtered.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground">
-          Khong tim thay van ban nao
+          Không tìm thấy văn bản nào
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
           {filtered.map((doc) => (
             <EmployeeDocumentCard
               key={doc.id}

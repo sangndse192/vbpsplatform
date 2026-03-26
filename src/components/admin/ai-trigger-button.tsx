@@ -22,7 +22,7 @@ export function AiTriggerButton({
   const [loading, setLoading] = useState(false);
 
   async function handleTrigger() {
-    if (!confirm("Su dung AI de phan tich van ban? Qua trinh co the mat 1-2 phut.")) return;
+    if (!confirm("Sử dụng AI để phân tích văn bản? Quá trình có thể mất 1-2 phút.")) return;
 
     setLoading(true);
     onProcessingStart();
@@ -47,7 +47,7 @@ export function AiTriggerButton({
     return (
       <Button variant="outline" disabled>
         <Sparkles className="mr-2 h-4 w-4" />
-        Tai PDF truoc de su dung AI
+        Tải PDF trước để sử dụng AI
       </Button>
     );
   }
@@ -63,7 +63,7 @@ export function AiTriggerButton({
       ) : (
         <Sparkles className="mr-2 h-4 w-4" />
       )}
-      {loading || isProcessing ? "Dang xu ly AI..." : "Tao tom tat & cau hoi AI"}
+      {loading || isProcessing ? "Đang xử lý AI..." : "Tạo tóm tắt & câu hỏi AI"}
     </Button>
   );
 }

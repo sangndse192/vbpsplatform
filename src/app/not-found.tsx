@@ -7,12 +7,12 @@ export default function NotFoundPage() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="text-center space-y-4 max-w-md">
         <FileQuestion className="h-12 w-12 text-muted-foreground mx-auto" />
-        <h1 className="text-xl font-bold">Trang khong ton tai</h1>
+        <h1 className="text-xl font-bold">Trang không tồn tại</h1>
         <p className="text-sm text-muted-foreground">
-          Trang ban dang tim khong ton tai hoac da bi xoa.
+          Trang bạn đang tìm không tồn tại hoặc đã bị xóa.
         </p>
         <Link href="/">
-          <Button>Quay ve trang chu</Button>
+          <Button>Quay về trang chủ</Button>
         </Link>
       </div>
     </div>

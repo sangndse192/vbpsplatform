@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Search, Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DocumentCard } from "./document-card";
 import { toggleDocumentStatus, deleteDocument } from "@/lib/actions/documents";
 import type { Document, DocStatus } from "@/lib/supabase/types";
@@ -17,6 +15,7 @@ type DocumentListProps = {
 
 export function DocumentList({ documents, counts, onCreateClick }: DocumentListProps) {
   const [search, setSearch] = useState("");
+  const [activeTab, setActiveTab] = useState<"all" | "published" | "draft" | "paused">("all");
   const [isPending, startTransition] = useTransition();
 
   const filtered = search
@@ -39,12 +38,12 @@ export function DocumentList({ documents, counts, onCreateClick }: DocumentListP
     });
   }
 
-  function renderGrid(docs: Document[]) {
+  function renderList(docs: Document[]) {
     if (docs.length === 0) {
-      return <p className="text-center text-muted-foreground py-8">Khong co van ban nao</p>;
+      return <p className="text-center text-muted-foreground py-8">Không có văn bản nào</p>;
     }
     return (
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-2">
         {docs.map((doc) => (
           <DocumentCard
             key={doc.id}
@@ -59,39 +58,44 @@ export function DocumentList({ documents, counts, onCreateClick }: DocumentListP
 
   return (
     <div className={`space-y-4 ${isPending ? "opacity-70 pointer-events-none" : ""}`}>
-      <div className="flex items-center gap-3">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Tim kiem van ban..."
-            className="pl-9"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+      {/* Row 1: Filter pill tabs + Create button */}
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-2">
+          {(
+            [
+              { key: "all", label: "Tất cả", count: counts.all },
+              { key: "published", label: "Đang hiệu lực", count: counts.published },
+              { key: "draft", label: "Nháp", count: counts.draft },
+              { key: "paused", label: "Tạm dừng", count: counts.paused },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                activeTab === tab.key
+                  ? "bg-indigo-600 text-white"
+                  : "border border-gray-300 text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-        <Button onClick={onCreateClick}>
-          <Plus className="h-4 w-4 mr-2" /> Tao van ban
+        <Button
+          onClick={onCreateClick}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white"
+        >
+          <Plus className="h-4 w-4 mr-2" /> Tạo văn bản mới
         </Button>
       </div>
 
-      <Tabs defaultValue="all">
-        <TabsList>
-          <TabsTrigger value="all">Tat ca ({counts.all})</TabsTrigger>
-          <TabsTrigger value="published">Published ({counts.published})</TabsTrigger>
-          <TabsTrigger value="draft">Draft ({counts.draft})</TabsTrigger>
-          <TabsTrigger value="paused">Paused ({counts.paused})</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all">{renderGrid(filtered)}</TabsContent>
-        <TabsContent value="published">
-          {renderGrid(filtered.filter((d) => d.status === "published"))}
-        </TabsContent>
-        <TabsContent value="draft">
-          {renderGrid(filtered.filter((d) => d.status === "draft"))}
-        </TabsContent>
-        <TabsContent value="paused">
-          {renderGrid(filtered.filter((d) => d.status === "paused"))}
-        </TabsContent>
-      </Tabs>
+      {/* Document list */}
+      {renderList(
+        activeTab === "all"
+          ? filtered
+          : filtered.filter((d) => d.status === activeTab)
+      )}
     </div>
   );
 }

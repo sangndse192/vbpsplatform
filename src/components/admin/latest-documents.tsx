@@ -22,21 +22,21 @@ const statusDot: Record<string, string> = {
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const hours = Math.floor(diff / 3_600_000);
-  if (hours < 1) return "Vua xong";
-  if (hours < 24) return `${hours}h truoc`;
+  if (hours < 1) return "Vừa xong";
+  if (hours < 24) return `${hours}h trước`;
   const days = Math.floor(hours / 24);
-  return `${days}d truoc`;
+  return `${days} ngày trước`;
 }
 
 export function LatestDocuments({ documents }: Props) {
   return (
-    <Card>
+    <Card className="rounded-2xl shadow-[0_2px_8px_rgba(99,102,241,0.06)] border-0">
       <CardHeader>
-        <CardTitle className="text-sm">Tai lieu moi nhat</CardTitle>
+        <CardTitle className="text-sm">Văn bản mới nhất</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-3 p-6">
         {documents.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Chua co tai lieu</p>
+          <p className="text-sm text-muted-foreground">Chưa có tài liệu</p>
         ) : (
           documents.map((doc) => (
             <Link

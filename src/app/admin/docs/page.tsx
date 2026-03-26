@@ -9,7 +9,7 @@ export default async function AdminDocsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Quan ly van ban</h1>
+      <h1 className="text-[17px] font-extrabold text-slate-800">Quản lý Văn bản Chính sách</h1>
       <DocsPageClient documents={docsResult.data ?? []} counts={counts} />
     </div>
   );

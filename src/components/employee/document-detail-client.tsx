@@ -59,7 +59,7 @@ export function DocumentDetailClient({ document, progress, initialTab, counts }:
         onValueChange={handleTabChange}
       >
         <TabsList variant="line" className="w-full justify-start">
-          <TabsTrigger value="detail">Chi tiet</TabsTrigger>
+          <TabsTrigger value="detail">Chi tiết</TabsTrigger>
           <TabsTrigger value="faq" className="gap-1">
             FAQ
             {counts.faqs > 0 && (
@@ -77,7 +77,7 @@ export function DocumentDetailClient({ document, progress, initialTab, counts }:
             )}
           </TabsTrigger>
           <TabsTrigger value="comments" className="gap-1">
-            Gop y
+            Góp ý
             {counts.comments > 0 && (
               <Badge variant="secondary" className="ml-1 h-4 min-w-4 px-1 text-[10px]">
                 {counts.comments}

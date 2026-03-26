@@ -8,10 +8,10 @@ type LearningProgressProps = {
 };
 
 const steps = [
-  { key: "has_read" as const, label: "Doc van ban", icon: BookOpen },
+  { key: "has_read" as const, label: "Đọc văn bản", icon: BookOpen },
   { key: "viewed_faq" as const, label: "Xem FAQ", icon: HelpCircle },
-  { key: "quiz_passed" as const, label: "Lam quiz", icon: Award },
-  { key: "sent_feedback" as const, label: "Gop y", icon: MessageSquare },
+  { key: "quiz_passed" as const, label: "Làm quiz", icon: Award },
+  { key: "sent_feedback" as const, label: "Góp ý", icon: MessageSquare },
 ];
 
 export function LearningProgress({ progress }: LearningProgressProps) {

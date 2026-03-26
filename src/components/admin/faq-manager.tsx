@@ -45,7 +45,7 @@ export function FaqManager({ documentId, faqs }: Props) {
   }
 
   function handleDelete(id: string) {
-    if (!confirm("Xoa FAQ nay?")) return;
+    if (!confirm("Xóa FAQ này?")) return;
     startTransition(async () => { await deleteFaq(id, documentId); });
   }
 
@@ -61,11 +61,11 @@ export function FaqManager({ documentId, faqs }: Props) {
         editingId === faq.id ? (
           <Card key={faq.id}>
             <CardContent className="space-y-2 pt-4">
-              <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Cau hoi" />
-              <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Tra loi" rows={3} />
+              <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Câu hỏi" />
+              <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Trả lời" rows={3} />
               <div className="flex gap-2">
-                <Button size="sm" onClick={() => handleUpdate(faq.id)}><Check className="h-4 w-4 mr-1" />Luu</Button>
-                <Button size="sm" variant="ghost" onClick={() => setEditingId(null)}><X className="h-4 w-4 mr-1" />Huy</Button>
+                <Button size="sm" onClick={() => handleUpdate(faq.id)}><Check className="h-4 w-4 mr-1" />Lưu</Button>
+                <Button size="sm" variant="ghost" onClick={() => setEditingId(null)}><X className="h-4 w-4 mr-1" />Hủy</Button>
               </div>
             </CardContent>
           </Card>
@@ -94,19 +94,19 @@ export function FaqManager({ documentId, faqs }: Props) {
       {showAdd ? (
         <Card>
           <CardContent className="space-y-2 pt-4">
-            <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Cau hoi" />
-            <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Tra loi" rows={3} />
+            <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Câu hỏi" />
+            <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Trả lời" rows={3} />
             <div className="flex gap-2">
-              <Button size="sm" onClick={handleAdd}><Check className="h-4 w-4 mr-1" />Them</Button>
+              <Button size="sm" onClick={handleAdd}><Check className="h-4 w-4 mr-1" />Thêm</Button>
               <Button size="sm" variant="ghost" onClick={() => { setShowAdd(false); setQuestion(""); setAnswer(""); }}>
-                <X className="h-4 w-4 mr-1" />Huy
+                <X className="h-4 w-4 mr-1" />Hủy
               </Button>
             </div>
           </CardContent>
         </Card>
       ) : (
         <Button variant="outline" size="sm" onClick={() => { setShowAdd(true); setQuestion(""); setAnswer(""); }}>
-          <Plus className="h-4 w-4 mr-1" /> Them FAQ
+          <Plus className="h-4 w-4 mr-1" /> Thêm FAQ
         </Button>
       )}
     </div>

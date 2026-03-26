@@ -22,12 +22,12 @@ export default function InvitePage() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Mat khau khong khop");
+      setError("Mật khẩu không khớp");
       return;
     }
 
     if (password.length < 8) {
-      setError("Mat khau phai co it nhat 8 ky tu");
+      setError("Mật khẩu phải có ít nhất 8 ký tự");
       return;
     }
 
@@ -44,7 +44,7 @@ export default function InvitePage() {
           type: type || "invite",
         });
         if (verifyError) {
-          setError("Lien ket moi khong hop le hoac da het han");
+          setError("Liên kết mời không hợp lệ hoặc đã hết hạn");
           return;
         }
       }
@@ -55,7 +55,7 @@ export default function InvitePage() {
       });
 
       if (updateError) {
-        setError("Khong the cap nhat thong tin. Vui long thu lai.");
+        setError("Không thể cập nhật thông tin. Vui lòng thử lại.");
         return;
       }
 
@@ -73,7 +73,7 @@ export default function InvitePage() {
       router.push("/");
       router.refresh();
     } catch {
-      setError("Loi he thong. Vui long thu lai.");
+      setError("Lỗi hệ thống. Vui lòng thử lại.");
     } finally {
       setLoading(false);
     }
@@ -83,16 +83,16 @@ export default function InvitePage() {
     <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-indigo-700">
-          Chao mung den VBSP Platform
+          Chào mừng đến VBSP Platform
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Thiet lap tai khoan cua ban
+          Thiết lập tài khoản của bạn
         </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleAcceptInvite} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="fullName">Ho va ten</Label>
+            <Label htmlFor="fullName">Họ và tên</Label>
             <Input
               id="fullName"
               placeholder="Nguyen Van A"
@@ -102,7 +102,7 @@ export default function InvitePage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Mat khau</Label>
+            <Label htmlFor="password">Mật khẩu</Label>
             <Input
               id="password"
               type="password"
@@ -113,7 +113,7 @@ export default function InvitePage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Xac nhan mat khau</Label>
+            <Label htmlFor="confirmPassword">Xác nhận mật khẩu</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -127,7 +127,7 @@ export default function InvitePage() {
             <p className="text-sm text-destructive">{error}</p>
           )}
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Dang xu ly..." : "Hoan tat dang ky"}
+            {loading ? "Đang xử lý..." : "Hoàn tất đăng ký"}
           </Button>
         </form>
       </CardContent>

@@ -35,7 +35,7 @@ export function DocumentDetail({ document: doc, pdfUrl }: Props) {
   }
 
   function handleDelete() {
-    if (!confirm("Xoa van ban nay? Toan bo FAQ, quiz va file se bi xoa.")) return;
+    if (!confirm("Xóa văn bản này? Toàn bộ FAQ, quiz và file sẽ bị xóa.")) return;
     startTransition(async () => {
       await deleteDocument(doc.id);
       router.push("/admin/docs");
@@ -58,17 +58,17 @@ export function DocumentDetail({ document: doc, pdfUrl }: Props) {
         <div className="flex items-center gap-2">
           <StatusBadge status={doc.status} />
           <Button variant="outline" size="sm" onClick={handleToggle}>
-            {nextStatus === "published" ? <><Play className="h-4 w-4 mr-1" />Xuat ban</> : <><Pause className="h-4 w-4 mr-1" />Tam dung</>}
+            {nextStatus === "published" ? <><Play className="h-4 w-4 mr-1" />Kích hoạt</> : <><Pause className="h-4 w-4 mr-1" />Tạm dừng</>}
           </Button>
           <Button variant="outline" size="sm" className="text-destructive" onClick={handleDelete}>
-            <Trash2 className="h-4 w-4 mr-1" />Xoa
+            <Trash2 className="h-4 w-4 mr-1" />Xóa
           </Button>
         </div>
       </div>
 
       {/* Metadata */}
       <Card>
-        <CardHeader><CardTitle className="text-sm">Thong tin van ban</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-sm">Thông tin văn bản</CardTitle></CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
@@ -76,15 +76,15 @@ export function DocumentDetail({ document: doc, pdfUrl }: Props) {
               <Badge variant="outline">{doc.doc_type}</Badge>
             </div>
             <div>
-              <p className="text-muted-foreground">Muc do</p>
+              <p className="text-muted-foreground">Mức độ</p>
               <p className="font-medium capitalize">{doc.urgency}</p>
             </div>
             <div>
-              <p className="text-muted-foreground">Pham vi</p>
+              <p className="text-muted-foreground">Phạm vi</p>
               <p className="font-medium capitalize">{doc.target}</p>
             </div>
             <div>
-              <p className="text-muted-foreground">Ngay tao</p>
+              <p className="text-muted-foreground">Ngày tạo</p>
               <p>{new Date(doc.created_at).toLocaleDateString("vi-VN")}</p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export function DocumentDetail({ document: doc, pdfUrl }: Props) {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <Card><CardContent className="pt-4 text-center"><p className="text-2xl font-bold">{doc.view_count}</p><p className="text-xs text-muted-foreground">Luot xem</p></CardContent></Card>
+        <Card><CardContent className="pt-4 text-center"><p className="text-2xl font-bold">{doc.view_count}</p><p className="text-xs text-muted-foreground">Lượt xem</p></CardContent></Card>
         <Card><CardContent className="pt-4 text-center"><p className="text-2xl font-bold">{doc.faq_count}</p><p className="text-xs text-muted-foreground">FAQ</p></CardContent></Card>
         <Card><CardContent className="pt-4 text-center"><p className="text-2xl font-bold">{doc.quiz_count}</p><p className="text-xs text-muted-foreground">Quiz</p></CardContent></Card>
       </div>

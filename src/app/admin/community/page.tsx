@@ -18,7 +18,7 @@ export default async function AdminCommunityPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Cong dong</h1>
+      <h1 className="text-[17px] font-extrabold text-slate-800">Quản lý Cộng đồng</h1>
       <CommunityFeed
         currentUser={{
           id: user.id,

@@ -11,25 +11,25 @@ export async function DocumentAnalytics({ documentId }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm">Thong ke</CardTitle>
+        <CardTitle className="text-sm">Thống kê</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Overview stats */}
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center rounded-lg bg-blue-50 p-3">
             <p className="text-2xl font-bold text-blue-700">{totalViews}</p>
-            <p className="text-xs text-muted-foreground">Tong luot xem</p>
+            <p className="text-xs text-muted-foreground">Tổng lượt xem</p>
           </div>
           <div className="text-center rounded-lg bg-green-50 p-3">
             <p className="text-2xl font-bold text-green-700">{quizCompletionRate}%</p>
-            <p className="text-xs text-muted-foreground">Da lam quiz</p>
+            <p className="text-xs text-muted-foreground">Đã làm quiz</p>
           </div>
         </div>
 
         {/* Views by branch */}
         {viewsByBranch.length > 0 && (
           <div>
-            <p className="text-xs font-medium text-muted-foreground mb-2">Luot xem theo chi nhanh</p>
+            <p className="text-xs font-medium text-muted-foreground mb-2">Lượt xem theo chi nhánh</p>
             <div className="space-y-1.5">
               {viewsByBranch.slice(0, 8).map((item) => {
                 const maxViews = viewsByBranch[0].views;
@@ -53,7 +53,7 @@ export async function DocumentAnalytics({ documentId }: Props) {
         )}
 
         {viewsByBranch.length === 0 && (
-          <p className="text-sm text-muted-foreground text-center py-2">Chua co luot xem</p>
+          <p className="text-sm text-muted-foreground text-center py-2">Chưa có lượt xem</p>
         )}
       </CardContent>
     </Card>

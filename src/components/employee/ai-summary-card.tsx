@@ -11,7 +11,7 @@ export function AiSummaryCard({ aiSummary }: AiSummaryCardProps) {
       <Card className="border-dashed">
         <CardContent className="flex items-center gap-2 py-4 text-sm text-muted-foreground">
           <Sparkles className="h-4 w-4" />
-          <span>Tom tat AI dang duoc tao...</span>
+          <span>Tóm tắt AI đang được tạo...</span>
         </CardContent>
       </Card>
     );
@@ -26,25 +26,25 @@ export function AiSummaryCard({ aiSummary }: AiSummaryCardProps) {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm">
           <Sparkles className="h-4 w-4 text-blue-600" />
-          Tom tat 3 phut
+          Tóm tắt 3 phút
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 text-sm">
         {why && (
           <div>
-            <p className="font-medium text-blue-800">Tai sao quan trong</p>
+            <p className="font-medium text-blue-800">Tại sao quan trọng</p>
             <p className="text-blue-700">{why}</p>
           </div>
         )}
         {who && (
           <div>
-            <p className="font-medium text-blue-800">Doi tuong anh huong</p>
+            <p className="font-medium text-blue-800">Đối tượng ảnh hưởng</p>
             <p className="text-blue-700">{who}</p>
           </div>
         )}
         {points.length > 0 && (
           <div>
-            <p className="font-medium text-blue-800">Diem chinh</p>
+            <p className="font-medium text-blue-800">Điểm chính</p>
             <ul className="list-disc pl-4 text-blue-700 space-y-1">
               {points.map((p, i) => (
                 <li key={i}>{p}</li>

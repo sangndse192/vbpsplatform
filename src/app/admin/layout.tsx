@@ -28,12 +28,16 @@ export default async function AdminLayout({
     <div className="flex h-screen overflow-hidden">
       <Sidebar
         navItems={ADMIN_NAV_ITEMS}
-        theme="indigo"
-        portalName="VBSP Admin"
+        role="admin"
+        switchUrl="/employee/docs"
+        switchLabel="Chuyển sang Site NV"
       />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Header userName={profile?.full_name} userEmail={user.email} />
-        <main className="flex-1 overflow-y-auto bg-gray-50 p-4 md:p-6">
+        <Header
+          userName={profile?.full_name}
+          userRole="Quản trị viên"
+        />
+        <main className="flex-1 overflow-y-auto bg-[#f0f4ff] p-4 md:p-6">
           {children}
         </main>
       </div>

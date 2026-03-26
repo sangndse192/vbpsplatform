@@ -56,13 +56,13 @@ export function SearchBar() {
       <div className="relative">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Tim kiem..."
+          placeholder="Tìm kiếm..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => results && setOpen(true)}
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
           className="pl-8 pr-8 h-8 text-sm"
-          aria-label="Tim kiem tai lieu va bai viet"
+          aria-label="Tìm kiếm tài liệu và bài viết"
         />
         {query && (
           <button
@@ -77,14 +77,14 @@ export function SearchBar() {
       {open && (
         <div className="absolute top-full left-0 right-0 z-50 mt-1 rounded-lg border bg-white shadow-lg max-h-80 overflow-y-auto">
           {loading ? (
-            <div className="p-4 text-center text-sm text-muted-foreground">Dang tim...</div>
+            <div className="p-4 text-center text-sm text-muted-foreground">Đang tìm...</div>
           ) : !hasResults ? (
-            <div className="p-4 text-center text-sm text-muted-foreground">Khong tim thay ket qua</div>
+            <div className="p-4 text-center text-sm text-muted-foreground">Không tìm thấy kết quả</div>
           ) : (
             <>
               {results!.documents.length > 0 && (
                 <div>
-                  <p className="px-3 pt-2 pb-1 text-xs font-medium text-muted-foreground">Tai lieu</p>
+                  <p className="px-3 pt-2 pb-1 text-xs font-medium text-muted-foreground">Tài liệu</p>
                   {results!.documents.map((doc) => (
                     <a
                       key={doc.id}
@@ -101,7 +101,7 @@ export function SearchBar() {
               )}
               {results!.posts.length > 0 && (
                 <div>
-                  <p className="px-3 pt-2 pb-1 text-xs font-medium text-muted-foreground border-t">Bai viet</p>
+                  <p className="px-3 pt-2 pb-1 text-xs font-medium text-muted-foreground border-t">Bài viết</p>
                   {results!.posts.map((post) => (
                     <a
                       key={post.id}

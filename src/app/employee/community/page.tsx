@@ -18,11 +18,11 @@ export default async function EmployeeCommunityPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Cong dong</h1>
+      <h1 className="text-[17px] font-extrabold text-slate-800">Cộng đồng</h1>
       <CommunityFeed
         currentUser={{
           id: user.id,
-          name: profile?.full_name ?? "Nhan vien",
+          name: profile?.full_name ?? "Nhân viên",
           role: profile?.role ?? "employee",
         }}
       />

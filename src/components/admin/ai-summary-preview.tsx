@@ -31,7 +31,7 @@ export function AiSummaryPreview({ summary, onApprove, onReject }: Props) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm">Tom tat AI</CardTitle>
+        <CardTitle className="text-sm">Tóm tắt AI</CardTitle>
         <div className="flex gap-1">
           <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setEditing(!editing)}>
             <Pencil className="h-3 w-3" />
@@ -48,30 +48,30 @@ export function AiSummaryPreview({ summary, onApprove, onReject }: Props) {
         {editing ? (
           <>
             <div>
-              <label className="text-xs font-medium text-muted-foreground">Tai sao quan trong</label>
+              <label className="text-xs font-medium text-muted-foreground">Tại sao quan trọng</label>
               <Textarea value={why} onChange={(e) => setWhy(e.target.value)} rows={2} />
             </div>
             <div>
-              <label className="text-xs font-medium text-muted-foreground">Doi tuong anh huong</label>
+              <label className="text-xs font-medium text-muted-foreground">Đối tượng ảnh hưởng</label>
               <Textarea value={who} onChange={(e) => setWho(e.target.value)} rows={2} />
             </div>
             <div>
-              <label className="text-xs font-medium text-muted-foreground">Diem chinh (moi dong 1 diem)</label>
+              <label className="text-xs font-medium text-muted-foreground">Điểm chính (mỗi dòng 1 điểm)</label>
               <Textarea value={points} onChange={(e) => setPoints(e.target.value)} rows={4} />
             </div>
           </>
         ) : (
           <>
             <div>
-              <p className="font-medium">Tai sao quan trong</p>
+              <p className="font-medium">Tại sao quan trọng</p>
               <p className="text-muted-foreground">{why}</p>
             </div>
             <div>
-              <p className="font-medium">Doi tuong anh huong</p>
+              <p className="font-medium">Đối tượng ảnh hưởng</p>
               <p className="text-muted-foreground">{who}</p>
             </div>
             <div>
-              <p className="font-medium">Diem chinh</p>
+              <p className="font-medium">Điểm chính</p>
               <ul className="list-disc pl-4 text-muted-foreground">
                 {points.split("\n").filter(Boolean).map((p, i) => (
                   <li key={i}>{p}</li>

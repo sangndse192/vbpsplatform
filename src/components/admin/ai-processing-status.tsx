@@ -13,7 +13,7 @@ export function AiProcessingStatus({ status, error }: Props) {
     return (
       <Badge variant="outline" className="gap-1">
         <Sparkles className="h-3 w-3" />
-        Chua xu ly AI
+        Chưa xử lý AI
       </Badge>
     );
   }
@@ -22,7 +22,7 @@ export function AiProcessingStatus({ status, error }: Props) {
     return (
       <Badge className="gap-1 bg-yellow-100 text-yellow-700 hover:bg-yellow-100">
         <Loader2 className="h-3 w-3 animate-spin" />
-        Dang xu ly...
+        Đang xử lý...
       </Badge>
     );
   }
@@ -31,7 +31,7 @@ export function AiProcessingStatus({ status, error }: Props) {
     return (
       <Badge className="gap-1 bg-green-100 text-green-700 hover:bg-green-100">
         <CheckCircle2 className="h-3 w-3" />
-        AI da hoan thanh
+        AI đã hoàn thành
       </Badge>
     );
   }
@@ -41,7 +41,7 @@ export function AiProcessingStatus({ status, error }: Props) {
       <div className="space-y-1">
         <Badge variant="destructive" className="gap-1">
           <AlertCircle className="h-3 w-3" />
-          AI that bai
+          AI thất bại
         </Badge>
         {error && <p className="text-xs text-destructive">{error}</p>}
       </div>

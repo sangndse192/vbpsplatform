@@ -38,7 +38,7 @@ export default async function EmployeeDocsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Van ban</h1>
+      <h1 className="text-[17px] font-extrabold text-slate-800">Văn bản Chính sách</h1>
       <DocumentGrid
         documents={(documents ?? []) as Document[]}
         progressMap={progressMap}

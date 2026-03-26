@@ -28,7 +28,7 @@ export function AmbassadorContact({ ambassador }: AmbassadorContactProps) {
         </Avatar>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium truncate">
-            {ambassador.full_name ?? "Dai su"}
+            {ambassador.full_name ?? "Đại sứ"}
           </p>
           {ambassador.position && (
             <p className="text-xs text-muted-foreground">{ambassador.position}</p>

@@ -56,7 +56,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
       <Card>
         <CardContent className="py-4 space-y-3">
           <Textarea
-            placeholder="Gop y ve van ban nay..."
+            placeholder="Góp ý về văn bản này..."
             value={text}
             onChange={(e) => setText(e.target.value.slice(0, 500))}
             rows={3}
@@ -71,7 +71,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
               disabled={!text.trim() || submitting}
             >
               <Send className="mr-2 h-4 w-4" />
-              {submitting ? "Dang gui..." : "Gui gop y"}
+              {submitting ? "Đang gửi..." : "Gửi góp ý"}
             </Button>
           </div>
         </CardContent>
@@ -87,7 +87,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
       ) : comments.length === 0 ? (
         <div className="flex flex-col items-center gap-2 py-12 text-muted-foreground">
           <MessageSquare className="h-8 w-8" />
-          <p>Hay la nguoi dau tien gop y</p>
+          <p>Hãy là người đầu tiên góp ý</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -110,7 +110,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
                     )}
                   </Avatar>
                   <span className="text-sm font-medium">
-                    {comment.user?.full_name ?? "Nhan vien"}
+                    {comment.user?.full_name ?? "Nhân viên"}
                   </span>
                   <span className="text-xs text-muted-foreground ml-auto">
                     {new Date(comment.created_at).toLocaleDateString("vi-VN", {
@@ -131,7 +131,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
                     <div className="flex items-center gap-2 mb-1">
                       <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100">
                         <Shield className="mr-1 h-3 w-3" />
-                        Phan hoi chinh thuc
+                        Phản hồi chính thức
                       </Badge>
                       {comment.replier?.full_name && (
                         <span className="text-xs text-blue-600">
@@ -150,7 +150,7 @@ export function DocumentCommentsTab({ documentId }: Props) {
                   </div>
                 ) : (
                   <p className="text-xs text-muted-foreground italic">
-                    Dang cho phan hoi tu HQ
+                    Đang chờ phản hồi từ HQ
                   </p>
                 )}
               </CardContent>

@@ -39,7 +39,7 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
       });
 
       if (result.error) {
-        setError(typeof result.error === "string" ? result.error : "Loi tao van ban");
+        setError(typeof result.error === "string" ? result.error : "Lỗi tạo văn bản");
         return;
       }
 
@@ -61,57 +61,57 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Tao van ban moi</DialogTitle>
+          <DialogTitle>Tạo văn bản mới</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="doc_number">So van ban</Label>
+            <Label htmlFor="doc_number">Số văn bản</Label>
             <Input id="doc_number" name="doc_number" placeholder="VB-2026-001" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="title">Tieu de *</Label>
+            <Label htmlFor="title">Tiêu đề *</Label>
             <Input id="title" name="title" required />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <Label>Loai van ban</Label>
+              <Label>Loại văn bản</Label>
               <Select name="doc_type" defaultValue="policy">
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="policy">Chinh sach</SelectItem>
-                  <SelectItem value="regulation">Quy dinh</SelectItem>
-                  <SelectItem value="guideline">Huong dan</SelectItem>
-                  <SelectItem value="circular">Cong van</SelectItem>
-                  <SelectItem value="decision">Quyet dinh</SelectItem>
-                  <SelectItem value="other">Khac</SelectItem>
+                  <SelectItem value="policy">Chính sách</SelectItem>
+                  <SelectItem value="regulation">Quy định</SelectItem>
+                  <SelectItem value="guideline">Hướng dẫn</SelectItem>
+                  <SelectItem value="circular">Thông tư</SelectItem>
+                  <SelectItem value="decision">Quyết định</SelectItem>
+                  <SelectItem value="other">Khác</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Muc do</Label>
+              <Label>Mức độ</Label>
               <Select name="urgency" defaultValue="normal">
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="normal">Binh thuong</SelectItem>
-                  <SelectItem value="important">Quan trong</SelectItem>
-                  <SelectItem value="urgent">Khan cap</SelectItem>
+                  <SelectItem value="normal">Bình thường</SelectItem>
+                  <SelectItem value="important">Quan trọng</SelectItem>
+                  <SelectItem value="urgent">Khẩn cấp</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
           <div className="space-y-2">
-            <Label>Pham vi</Label>
+            <Label>Phạm vi</Label>
             <Select name="target" defaultValue="all">
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Toan he thong</SelectItem>
-                <SelectItem value="branch">Theo chi nhanh</SelectItem>
-                <SelectItem value="department">Theo phong ban</SelectItem>
+                <SelectItem value="all">Toàn hệ thống</SelectItem>
+                <SelectItem value="branch">Theo chi nhánh</SelectItem>
+                <SelectItem value="department">Theo phòng ban</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="summary">Tom tat</Label>
+            <Label htmlFor="summary">Tóm tắt</Label>
             <Textarea id="summary" name="summary" rows={3} />
           </div>
           <div className="space-y-2">
@@ -124,10 +124,10 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
           {error && <p className="text-sm text-destructive">{error}</p>}
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Huy
+              Hủy
             </Button>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Dang tao..." : "Tao van ban"}
+              {isPending ? "Đang tạo..." : "Tạo văn bản"}
             </Button>
           </div>
         </form>

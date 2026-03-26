@@ -39,7 +39,7 @@ export function QuizQuestion({
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>
-              Cau {questionIndex + 1} / {totalQuestions}
+              Câu {questionIndex + 1} / {totalQuestions}
             </span>
             <span>{Math.round(progressValue)}%</span>
           </div>
@@ -74,15 +74,15 @@ export function QuizQuestion({
             onClick={onPrev}
             disabled={questionIndex === 0}
           >
-            Truoc
+            Trước
           </Button>
           {isLast ? (
             <Button onClick={onSubmit} disabled={selectedAnswer === null}>
-              Nop bai
+              Nộp bài
             </Button>
           ) : (
             <Button onClick={onNext} disabled={selectedAnswer === null}>
-              Tiep theo
+              Tiếp theo
             </Button>
           )}
         </div>

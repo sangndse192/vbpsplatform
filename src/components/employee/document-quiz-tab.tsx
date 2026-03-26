@@ -74,7 +74,7 @@ export function DocumentQuizTab({ documentId }: Props) {
     return (
       <div className="flex flex-col items-center gap-2 py-12 text-muted-foreground">
         <Award className="h-8 w-8" />
-        <p>Chua co quiz cho van ban nay</p>
+        <p>Chưa có quiz cho văn bản này</p>
       </div>
     );
   }
@@ -110,7 +110,7 @@ export function DocumentQuizTab({ documentId }: Props) {
     <div>
       {submitting ? (
         <div className="flex items-center justify-center py-12 text-muted-foreground">
-          Dang cham diem...
+          Đang chấm điểm...
         </div>
       ) : (
         <QuizQuestion

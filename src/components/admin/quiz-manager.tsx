@@ -42,7 +42,7 @@ function QuizForm({
     <Card>
       <CardContent className="space-y-3 pt-4">
         <div className="space-y-1">
-          <Label>Cau hoi</Label>
+          <Label>Câu hỏi</Label>
           <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
         </div>
         {options.map((opt, i) => (
@@ -61,13 +61,13 @@ function QuizForm({
                 next[i] = e.target.value;
                 setOptions(next);
               }}
-              placeholder={`Lua chon ${String.fromCharCode(65 + i)}`}
+              placeholder={`Lựa chọn ${String.fromCharCode(65 + i)}`}
               className="flex-1"
             />
           </div>
         ))}
         <div className="space-y-1">
-          <Label>Giai thich (tuy chon)</Label>
+          <Label>Giải thích (tùy chọn)</Label>
           <Input value={explanation} onChange={(e) => setExplanation(e.target.value)} />
         </div>
         <div className="flex gap-2">
@@ -78,7 +78,7 @@ function QuizForm({
             <Check className="h-4 w-4 mr-1" />{submitLabel}
           </Button>
           <Button size="sm" variant="ghost" onClick={onCancel}>
-            <X className="h-4 w-4 mr-1" />Huy
+            <X className="h-4 w-4 mr-1" />Hủy
           </Button>
         </div>
       </CardContent>
@@ -106,7 +106,7 @@ export function QuizManager({ documentId, quizzes }: Props) {
   }
 
   function handleDelete(id: string) {
-    if (!confirm("Xoa cau hoi nay?")) return;
+    if (!confirm("Xóa câu hỏi này?")) return;
     startTransition(async () => { await deleteQuiz(id, documentId); });
   }
 
@@ -119,7 +119,7 @@ export function QuizManager({ documentId, quizzes }: Props) {
             initial={quiz}
             onSubmit={(data) => handleUpdate(quiz.id, data)}
             onCancel={() => setEditingId(null)}
-            submitLabel="Luu"
+            submitLabel="Lưu"
           />
         ) : (
           <Card key={quiz.id}>
@@ -150,10 +150,10 @@ export function QuizManager({ documentId, quizzes }: Props) {
       )}
 
       {showAdd ? (
-        <QuizForm onSubmit={handleAdd} onCancel={() => setShowAdd(false)} submitLabel="Them" />
+        <QuizForm onSubmit={handleAdd} onCancel={() => setShowAdd(false)} submitLabel="Thêm" />
       ) : (
         <Button variant="outline" size="sm" onClick={() => setShowAdd(true)}>
-          <Plus className="h-4 w-4 mr-1" /> Them cau hoi
+          <Plus className="h-4 w-4 mr-1" /> Thêm câu hỏi
         </Button>
       )}
     </div>

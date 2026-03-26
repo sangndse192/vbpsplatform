@@ -68,16 +68,16 @@ export function NotificationBell() {
           {/* Dropdown */}
           <div className="absolute right-0 top-full z-50 mt-2 w-80 rounded-lg border bg-white shadow-lg">
             <div className="flex items-center justify-between border-b px-4 py-2">
-              <h3 className="text-sm font-semibold">Thong bao</h3>
+              <h3 className="text-sm font-semibold">Thông báo</h3>
               {unreadCount > 0 && (
                 <Button variant="ghost" size="sm" className="text-xs h-7" onClick={handleMarkAllRead}>
-                  Doc tat ca
+                  Đọc tất cả
                 </Button>
               )}
             </div>
             <div className="max-h-80 overflow-y-auto">
               {loading ? (
-                <div className="p-4 text-center text-sm text-muted-foreground">Dang tai...</div>
+                <div className="p-4 text-center text-sm text-muted-foreground">Đang tải...</div>
               ) : (
                 <NotificationList
                   notifications={notifications}

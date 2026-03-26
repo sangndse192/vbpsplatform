@@ -17,22 +17,22 @@ export function QuizStartScreen({ questionCount, bestScore, onStart }: Props) {
     <Card>
       <CardContent className="flex flex-col items-center gap-4 py-8">
         <Award className="h-12 w-12 text-blue-600" />
-        <h3 className="text-lg font-semibold">Kiem tra kien thuc</h3>
+        <h3 className="text-lg font-semibold">Kiểm tra kiến thức</h3>
 
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <span className="flex items-center gap-1">
             <FileQuestion className="h-4 w-4" />
-            {questionCount} cau hoi
+            {questionCount} câu hỏi
           </span>
           <span className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
-            ~{estimatedMinutes} phut
+            ~{estimatedMinutes} phút
           </span>
         </div>
 
         {bestScore && (
           <p className="text-sm">
-            Diem cao nhat:{" "}
+            Điểm cao nhất:{" "}
             <span className="font-semibold text-green-600">
               {bestScore.score}/{bestScore.total}
             </span>
@@ -40,7 +40,7 @@ export function QuizStartScreen({ questionCount, bestScore, onStart }: Props) {
         )}
 
         <Button onClick={onStart} className="mt-2">
-          Bat dau lam quiz
+          Bắt đầu làm quiz
         </Button>
       </CardContent>
     </Card>

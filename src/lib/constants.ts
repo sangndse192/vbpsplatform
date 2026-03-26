@@ -1,34 +1,27 @@
-import {
-  LayoutDashboard,
-  FileText,
-  Users,
-  MessageSquare,
-  BarChart3,
-  Bell,
-  UserCircle,
-  type LucideIcon,
-} from "lucide-react";
+export type IconName =
+  | "LayoutDashboard"
+  | "FileText"
+  | "Users"
+  | "MessageSquare"
+  | "BarChart3"
+  | "Bell"
+  | "UserCircle";
 
 export type NavItem = {
   label: string;
   href: string;
-  icon: LucideIcon;
+  icon: IconName;
 };
 
 export const ADMIN_NAV_ITEMS: NavItem[] = [
-  { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "Documents", href: "/admin/docs", icon: FileText },
-  { label: "Users", href: "/admin/users", icon: Users },
-  { label: "Community", href: "/admin/community", icon: MessageSquare },
-  { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+  { label: "Dashboard", href: "/admin/dashboard", icon: "LayoutDashboard" },
+  { label: "Quản lý văn bản", href: "/admin/docs", icon: "FileText" },
+  { label: "Cộng đồng", href: "/admin/community", icon: "MessageSquare" },
 ];
 
 export const EMPLOYEE_NAV_ITEMS: NavItem[] = [
-  { label: "Dashboard", href: "/employee/dashboard", icon: LayoutDashboard },
-  { label: "Documents", href: "/employee/docs", icon: FileText },
-  { label: "Community", href: "/employee/community", icon: MessageSquare },
-  { label: "Notifications", href: "/employee/notifications", icon: Bell },
-  { label: "Profile", href: "/employee/profile", icon: UserCircle },
+  { label: "Văn bản", href: "/employee/docs", icon: "FileText" },
+  { label: "Cộng đồng", href: "/employee/community", icon: "MessageSquare" },
 ];
 
 export const PUBLIC_ROUTES = ["/auth/login", "/auth/invite"];

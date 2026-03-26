@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ImagePlus, X, Loader2, Send } from "lucide-react";
+import { ImagePlus, X, Loader2, Send, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,11 +12,12 @@ import { createPost } from "@/lib/actions/posts";
 type Props = {
   userId: string;
   onPostCreated: () => void;
+  userInitial?: string;
 };
 
-const PRESET_TAGS = ["Chinh sach moi", "Hoi dap", "Kinh nghiem", "Thao luan"];
+const PRESET_TAGS = ["Kinh nghiệm", "Hỏi đáp", "Checklist", "Doanh nghiệp"];
 
-export function PostComposer({ userId, onPostCreated }: Props) {
+export function PostComposer({ userId, onPostCreated, userInitial }: Props) {
   const [content, setContent] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
@@ -54,7 +55,6 @@ export function PostComposer({ userId, onPostCreated }: Props) {
     setSubmitting(true);
 
     try {
-      // Upload images
       const imageUrls: string[] = [];
       if (imageFiles.length > 0) {
         const supabase = createClient();
@@ -79,7 +79,6 @@ export function PostComposer({ userId, onPostCreated }: Props) {
         tags: selectedTags,
       });
 
-      // Reset
       setContent("");
       setSelectedTags([]);
       imagePreviews.forEach(URL.revokeObjectURL);
@@ -94,16 +93,27 @@ export function PostComposer({ userId, onPostCreated }: Props) {
   return (
     <Card>
       <CardContent className="pt-4 space-y-3">
-        <Textarea
-          placeholder="Chia se voi dong nghiep..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows={3}
-        />
+        {/* Avatar + textarea row */}
+        <div className="flex gap-3">
+          <div className="flex-shrink-0 h-9 w-9 rounded-full bg-indigo-100 flex items-center justify-center">
+            {userInitial ? (
+              <span className="text-sm font-semibold text-indigo-700">{userInitial}</span>
+            ) : (
+              <UserCircle className="h-5 w-5 text-indigo-400" />
+            )}
+          </div>
+          <Textarea
+            placeholder="Chia sẻ kinh nghiệm, đặt câu hỏi với cộng đồng..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            rows={3}
+            className="flex-1 resize-none"
+          />
+        </div>
 
         {/* Image previews */}
         {imagePreviews.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap pl-12">
             {imagePreviews.map((src, i) => (
               <div key={i} className="relative w-16 h-16">
                 <img src={src} alt="" className="w-full h-full object-cover rounded" />
@@ -119,12 +129,16 @@ export function PostComposer({ userId, onPostCreated }: Props) {
         )}
 
         {/* Tags */}
-        <div className="flex gap-1.5 flex-wrap">
+        <div className="flex gap-1.5 flex-wrap pl-12">
           {PRESET_TAGS.map((tag) => (
             <Badge
               key={tag}
               variant={selectedTags.includes(tag) ? "default" : "outline"}
-              className="cursor-pointer text-xs"
+              className={`cursor-pointer text-xs transition-colors ${
+                selectedTags.includes(tag)
+                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                  : "hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-300"
+              }`}
               onClick={() => toggleTag(tag)}
             >
               #{tag}
@@ -133,7 +147,7 @@ export function PostComposer({ userId, onPostCreated }: Props) {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pl-12">
           <label className="cursor-pointer">
             <input
               type="file"
@@ -143,14 +157,26 @@ export function PostComposer({ userId, onPostCreated }: Props) {
               className="hidden"
               disabled={imageFiles.length >= 4}
             />
-            <div className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
               <ImagePlus className="h-4 w-4" />
-              Anh ({imageFiles.length}/4)
+              <span>📷 Thêm ảnh</span>
+              {imageFiles.length > 0 && (
+                <span className="text-muted-foreground">({imageFiles.length}/4)</span>
+              )}
             </div>
           </label>
-          <Button size="sm" onClick={handleSubmit} disabled={!content.trim() || submitting}>
-            {submitting ? <Loader2 className="mr-1 h-3 w-3 animate-spin" /> : <Send className="mr-1 h-3 w-3" />}
-            Dang
+          <Button
+            size="sm"
+            onClick={handleSubmit}
+            disabled={!content.trim() || submitting}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white"
+          >
+            {submitting ? (
+              <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Send className="mr-1.5 h-3.5 w-3.5" />
+            )}
+            Đăng tải
           </Button>
         </div>
       </CardContent>

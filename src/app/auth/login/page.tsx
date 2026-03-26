@@ -28,14 +28,14 @@ export default function LoginPage() {
       });
 
       if (authError) {
-        setError("Email hoac mat khau khong dung");
+        setError("Email hoặc mật khẩu không đúng");
         return;
       }
 
       router.push("/");
       router.refresh();
     } catch {
-      setError("Loi he thong. Vui long thu lai.");
+      setError("Lỗi hệ thống. Vui lòng thử lại.");
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ export default function LoginPage() {
           VBSP Platform
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          He thong quan ly van ban chinh sach
+          Hệ thống quản lý văn bản chính sách
         </p>
       </CardHeader>
       <CardContent>
@@ -65,7 +65,7 @@ export default function LoginPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Mat khau</Label>
+            <Label htmlFor="password">Mật khẩu</Label>
             <Input
               id="password"
               type="password"
@@ -78,7 +78,7 @@ export default function LoginPage() {
             <p className="text-sm text-destructive">{error}</p>
           )}
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Dang nhap..." : "Dang nhap"}
+            {loading ? "Đang nhập..." : "Đăng nhập"}
           </Button>
         </form>
       </CardContent>

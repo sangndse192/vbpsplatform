@@ -18,23 +18,23 @@ type Props = {
 export function BranchViewsChart({ data }: Props) {
   if (data.length === 0) {
     return (
-      <Card>
+      <Card className="rounded-2xl shadow-[0_2px_8px_rgba(99,102,241,0.06)] border-0">
         <CardHeader>
-          <CardTitle className="text-sm">Luot xem theo chi nhanh</CardTitle>
+          <CardTitle className="text-sm">Lượt tiếp cận theo Chi nhánh</CardTitle>
         </CardHeader>
         <CardContent className="text-sm text-muted-foreground py-8 text-center">
-          Chua co du lieu luot xem
+          Chưa có dữ liệu lượt xem
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card>
+    <Card className="rounded-2xl shadow-[0_2px_8px_rgba(99,102,241,0.06)] border-0">
       <CardHeader>
-        <CardTitle className="text-sm">Luot xem theo chi nhanh</CardTitle>
+        <CardTitle className="text-sm">Lượt tiếp cận theo Chi nhánh</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-6">
         <ResponsiveContainer width="100%" height={Math.max(200, data.length * 40)}>
           <BarChart data={data} layout="vertical" margin={{ left: 10, right: 30 }}>
             <defs>
@@ -51,7 +51,7 @@ export function BranchViewsChart({ data }: Props) {
               tick={{ fontSize: 12 }}
             />
             <Tooltip
-              formatter={(value) => [`${value} luot xem`, "Luot xem"]}
+              formatter={(value) => [`${value} lượt xem`, "Lượt xem"]}
             />
             <Bar dataKey="views" radius={[0, 4, 4, 0]} label={{ position: "right", fontSize: 12 }}>
               {data.map((_, i) => (

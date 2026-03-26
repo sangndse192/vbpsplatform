@@ -65,7 +65,7 @@ export function CommunityFeed({ currentUser }: Props) {
   }
 
   async function handleDelete(postId: string) {
-    if (!confirm("Xoa bai dang nay?")) return;
+    if (!confirm("Xóa bài đăng này?")) return;
     const result = await deletePost(postId);
     if (result.success) {
       setPosts((prev) => prev.filter((p) => p.id !== postId));
@@ -84,7 +84,7 @@ export function CommunityFeed({ currentUser }: Props) {
         {/* Active tag filter */}
         {activeTag && (
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Loc theo:</span>
+            <span className="text-sm text-muted-foreground">Lọc theo:</span>
             <Badge variant="default" className="gap-1">
               #{activeTag}
               <button onClick={handleClearTag}>
@@ -103,7 +103,7 @@ export function CommunityFeed({ currentUser }: Props) {
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground">
-            Chua co bai dang nao. Hay la nguoi dau tien chia se!
+            Chưa có bài đăng nào. Hãy là người đầu tiên chia sẻ!
           </div>
         ) : (
           <>
@@ -123,7 +123,7 @@ export function CommunityFeed({ currentUser }: Props) {
                 onClick={handleLoadMore}
                 disabled={loading}
               >
-                Xem them
+                Xem thêm
               </Button>
             )}
           </>
