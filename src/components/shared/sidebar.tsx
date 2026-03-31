@@ -72,10 +72,10 @@ function SidebarHeader({ role }: { role: "admin" | "employee" }) {
   return (
     <div className="flex h-14 items-center gap-3 px-4 border-b border-slate-200">
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold text-sm shrink-0">
-        VTB
+        VBSP
       </div>
       <div className="flex flex-col">
-        <span className="text-sm font-extrabold text-slate-800">VietinBank</span>
+        <span className="text-sm font-extrabold text-slate-800">VBSP Platform</span>
         <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
           {role === "admin" ? "ADMIN" : "NHÂN VIÊN"}
         </span>

@@ -11,7 +11,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   title: "VBSP Platform",
-  description: "VietinBank Policy Document Management Platform",
+  description: "VBSP Policy Document Management Platform",
 };
 
 export default function RootLayout({
