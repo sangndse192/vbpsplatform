@@ -90,17 +90,28 @@ export function QuizManager({ documentId, quizzes }: Props) {
   const [isPending, startTransition] = useTransition();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  const [error, setError] = useState("");
 
   function handleAdd(data: { question: string; options: string[]; correct_answer: number; explanation?: string }) {
+    setError("");
     startTransition(async () => {
-      await createQuiz(documentId, data);
+      const result = await createQuiz(documentId, data);
+      if (result.error) {
+        setError(typeof result.error === "string" ? result.error : "Vui lòng điền đầy đủ câu hỏi và 4 lựa chọn");
+        return;
+      }
       setShowAdd(false);
     });
   }
 
   function handleUpdate(id: string, data: { question: string; options: string[]; correct_answer: number; explanation?: string }) {
+    setError("");
     startTransition(async () => {
-      await updateQuiz(id, documentId, data);
+      const result = await updateQuiz(id, documentId, data);
+      if (result.error) {
+        setError(typeof result.error === "string" ? result.error : "Vui lòng điền đầy đủ câu hỏi và 4 lựa chọn");
+        return;
+      }
       setEditingId(null);
     });
   }
@@ -149,10 +160,12 @@ export function QuizManager({ documentId, quizzes }: Props) {
         )
       )}
 
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
       {showAdd ? (
-        <QuizForm onSubmit={handleAdd} onCancel={() => setShowAdd(false)} submitLabel="Thêm" />
+        <QuizForm onSubmit={handleAdd} onCancel={() => { setShowAdd(false); setError(""); }} submitLabel="Thêm" />
       ) : (
-        <Button variant="outline" size="sm" onClick={() => setShowAdd(true)}>
+        <Button variant="outline" size="sm" onClick={() => { setShowAdd(true); setError(""); }}>
           <Plus className="h-4 w-4 mr-1" /> Thêm câu hỏi
         </Button>
       )}

@@ -26,11 +26,17 @@ export function FaqManager({ documentId, faqs }: Props) {
   const [showAdd, setShowAdd] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [error, setError] = useState("");
 
   function handleAdd() {
     if (!question.trim() || !answer.trim()) return;
+    setError("");
     startTransition(async () => {
-      await createFaq(documentId, { question, answer });
+      const result = await createFaq(documentId, { question, answer });
+      if (result.error) {
+        setError(typeof result.error === "string" ? result.error : "Câu hỏi tối thiểu 10 ký tự, trả lời tối thiểu 20 ký tự");
+        return;
+      }
       setQuestion("");
       setAnswer("");
       setShowAdd(false);
@@ -38,8 +44,13 @@ export function FaqManager({ documentId, faqs }: Props) {
   }
 
   function handleUpdate(id: string) {
+    setError("");
     startTransition(async () => {
-      await updateFaq(id, documentId, { question, answer });
+      const result = await updateFaq(id, documentId, { question, answer });
+      if (result.error) {
+        setError(typeof result.error === "string" ? result.error : "Câu hỏi tối thiểu 10 ký tự, trả lời tối thiểu 20 ký tự");
+        return;
+      }
       setEditingId(null);
     });
   }
@@ -91,21 +102,23 @@ export function FaqManager({ documentId, faqs }: Props) {
         )
       )}
 
+      {error && <p className="text-sm text-destructive">{error}</p>}
+
       {showAdd ? (
         <Card>
           <CardContent className="space-y-2 pt-4">
-            <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Câu hỏi" />
-            <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Trả lời" rows={3} />
+            <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Câu hỏi (tối thiểu 10 ký tự)" />
+            <Textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Trả lời (tối thiểu 20 ký tự)" rows={3} />
             <div className="flex gap-2">
               <Button size="sm" onClick={handleAdd}><Check className="h-4 w-4 mr-1" />Thêm</Button>
-              <Button size="sm" variant="ghost" onClick={() => { setShowAdd(false); setQuestion(""); setAnswer(""); }}>
+              <Button size="sm" variant="ghost" onClick={() => { setShowAdd(false); setQuestion(""); setAnswer(""); setError(""); }}>
                 <X className="h-4 w-4 mr-1" />Hủy
               </Button>
             </div>
           </CardContent>
         </Card>
       ) : (
-        <Button variant="outline" size="sm" onClick={() => { setShowAdd(true); setQuestion(""); setAnswer(""); }}>
+        <Button variant="outline" size="sm" onClick={() => { setShowAdd(true); setQuestion(""); setAnswer(""); setError(""); }}>
           <Plus className="h-4 w-4 mr-1" /> Thêm FAQ
         </Button>
       )}

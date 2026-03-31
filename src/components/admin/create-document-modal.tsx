@@ -47,7 +47,13 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
       if (pdfFile && result.data?.id) {
         const uploadForm = new FormData();
         uploadForm.set("file", pdfFile);
-        await uploadPdf(uploadForm, result.data.id);
+        const uploadResult = await uploadPdf(uploadForm, result.data.id);
+        if (uploadResult.error) {
+          setError(`Tạo văn bản thành công nhưng upload PDF thất bại: ${uploadResult.error}`);
+          // Still navigate since document was created
+          router.push(`/admin/docs/${result.data.id}`);
+          return;
+        }
       }
 
       onOpenChange(false);
