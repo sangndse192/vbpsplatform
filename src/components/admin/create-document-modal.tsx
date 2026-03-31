@@ -84,12 +84,12 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
               <Select name="doc_type" defaultValue="policy">
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="policy">Chính sách</SelectItem>
-                  <SelectItem value="regulation">Quy định</SelectItem>
-                  <SelectItem value="guideline">Hướng dẫn</SelectItem>
-                  <SelectItem value="circular">Thông tư</SelectItem>
-                  <SelectItem value="decision">Quyết định</SelectItem>
-                  <SelectItem value="other">Khác</SelectItem>
+                  <SelectItem value="policy">Chính sách (Policy)</SelectItem>
+                  <SelectItem value="regulation">Quy định (Regulation)</SelectItem>
+                  <SelectItem value="guideline">Hướng dẫn (Guideline)</SelectItem>
+                  <SelectItem value="circular">Thông tư (Circular)</SelectItem>
+                  <SelectItem value="decision">Quyết định (Decision)</SelectItem>
+                  <SelectItem value="other">Khác (Other)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -98,9 +98,9 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
               <Select name="urgency" defaultValue="normal">
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="normal">Bình thường</SelectItem>
-                  <SelectItem value="important">Quan trọng</SelectItem>
-                  <SelectItem value="urgent">Khẩn cấp</SelectItem>
+                  <SelectItem value="normal">Bình thường (Normal)</SelectItem>
+                  <SelectItem value="important">Quan trọng (Important)</SelectItem>
+                  <SelectItem value="urgent">Khẩn cấp (Urgent)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -110,9 +110,9 @@ export function CreateDocumentModal({ open, onOpenChange }: Props) {
             <Select name="target" defaultValue="all">
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Toàn hệ thống</SelectItem>
-                <SelectItem value="branch">Theo chi nhánh</SelectItem>
-                <SelectItem value="department">Theo phòng ban</SelectItem>
+                <SelectItem value="all">Toàn hệ thống (All)</SelectItem>
+                <SelectItem value="branch">Theo chi nhánh (By Branch)</SelectItem>
+                <SelectItem value="department">Theo phòng ban (By Department)</SelectItem>
               </SelectContent>
             </Select>
           </div>
