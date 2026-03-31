@@ -102,10 +102,12 @@ async function handleEvent(payload, env) {
       if (!annotation) {
         return { status: 400, body: { error: "Missing annotation field" } };
       }
+      const extraLabels = extractHashtags(annotation.comment);
+      const cleanTitle = stripHashtags(annotation.comment).slice(0, 80);
       const issue = await createGitHubIssue(env, repo, {
-        title: `[QA] ${(annotation.comment || "No comment").slice(0, 80)}`,
+        title: `[QA] ${cleanTitle}`,
         body: formatSingleAnnotation(annotation, url),
-        labels: ["qa-feedback", mapKindToLabel(annotation.kind)],
+        labels: ["qa-feedback", mapKindToLabel(annotation.kind), ...extraLabels],
       });
       return {
         status: 201,
@@ -116,10 +118,11 @@ async function handleEvent(payload, env) {
     // Batch submit (onSubmit callback)
     case "submit": {
       const items = annotations || [];
+      const batchTags = [...new Set(items.flatMap((a) => extractHashtags(a.comment)))];
       const issue = await createGitHubIssue(env, repo, {
         title: `[QA Batch] ${items.length} item(s) — ${new URL(url).pathname}`,
         body: formatBatchAnnotations(items, url, output),
-        labels: ["qa-feedback", "batch"],
+        labels: ["qa-feedback", "batch", ...batchTags],
       });
       return {
         status: 201,
@@ -281,6 +284,17 @@ function mapKindToLabel(kind) {
     rearrange: "enhancement",
   };
   return map[kind] || "bug";
+}
+
+// Extract #hashtags from comment text as extra GitHub labels
+function extractHashtags(comment) {
+  const matches = (comment || "").match(/#(\w[\w-]*)/g) || [];
+  return matches.map((tag) => tag.slice(1));
+}
+
+// Strip #hashtags from comment for cleaner issue title
+function stripHashtags(comment) {
+  return (comment || "No comment").replace(/#\w[\w-]*/g, "").trim() || "No comment";
 }
 
 // ============================================================
