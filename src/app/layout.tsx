@@ -26,7 +26,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-be-vietnam-pro)]">
         {children}
-        <AgentationWrapper />
+        {process.env.NEXT_PUBLIC_AGENTATION_WEBHOOK && <AgentationWrapper />}
       </body>
     </html>
   );
