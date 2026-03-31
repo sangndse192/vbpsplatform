@@ -58,7 +58,7 @@ export function DocumentDetail({ document: doc, pdfUrl }: Props) {
         <div className="flex items-center gap-2">
           <StatusBadge status={doc.status} />
           <Button variant="outline" size="sm" onClick={handleToggle}>
-            {nextStatus === "published" ? <><Play className="h-4 w-4 mr-1" />Kích hoạt</> : <><Pause className="h-4 w-4 mr-1" />Tạm dừng</>}
+            {nextStatus === "published" ? <><Play className="h-4 w-4 mr-1" />Start</> : <><Pause className="h-4 w-4 mr-1" />Tạm dừng</>}
           </Button>
           <Button variant="outline" size="sm" className="text-destructive" onClick={handleDelete}>
             <Trash2 className="h-4 w-4 mr-1" />Xóa

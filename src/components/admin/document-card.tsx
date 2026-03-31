@@ -48,7 +48,7 @@ const targetLabel: Record<string, string> = {
 export function DocumentCard({ document, onToggleStatus, onDelete }: DocumentCardProps) {
   const isPublished = document.status === "published";
   const nextStatus: DocStatus = isPublished ? "paused" : "published";
-  const actionLabel = isPublished ? "Tạm dừng" : "Kích hoạt";
+  const actionLabel = isPublished ? "Tạm dừng" : "Start";
   const ActionIcon = isPublished ? Pause : Play;
 
   const dateStr = document.published_at ?? document.created_at;
