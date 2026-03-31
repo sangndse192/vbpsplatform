@@ -29,8 +29,7 @@ export default async function AdminLayout({
       <Sidebar
         navItems={ADMIN_NAV_ITEMS}
         role="admin"
-        switchUrl="/employee/docs"
-        switchLabel="Chuyển sang Site NV"
+        showLogout
       />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header

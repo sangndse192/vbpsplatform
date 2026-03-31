@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   LayoutDashboard,
@@ -11,8 +11,10 @@ import {
   BarChart3,
   Bell,
   UserCircle,
+  LogOut,
   type LucideIcon,
 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -34,6 +36,7 @@ type SidebarProps = {
   userProfile?: { name: string; branch?: string; isAmbassador?: boolean };
   switchUrl?: string;
   switchLabel?: string;
+  showLogout?: boolean;
 };
 
 function NavLinks({
@@ -126,12 +129,34 @@ function UserProfileSection({
   );
 }
 
+function LogoutButton() {
+  const router = useRouter();
+
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/auth/login");
+    router.refresh();
+  }
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="flex items-center justify-center gap-2 rounded-[10px] bg-red-50 border border-red-200 px-3 py-2.5 text-xs font-medium text-red-600 hover:bg-red-100 transition-colors w-full text-center"
+    >
+      <LogOut className="h-4 w-4" />
+      <span>Logout</span>
+    </button>
+  );
+}
+
 function SidebarContent({
   navItems,
   role,
   userProfile,
   switchUrl,
   switchLabel,
+  showLogout,
   pathname,
 }: SidebarProps & { pathname: string }) {
   return (
@@ -146,8 +171,8 @@ function SidebarContent({
         <NavLinks navItems={navItems} pathname={pathname} />
       </div>
 
-      {switchUrl && switchLabel && (
-        <div className="border-t border-slate-200 px-4 py-3">
+      <div className="border-t border-slate-200 px-4 py-3 flex flex-col gap-2">
+        {switchUrl && switchLabel && (
           <Link
             href={switchUrl}
             className="flex items-center justify-center gap-2 rounded-[10px] bg-indigo-50 border border-indigo-200 px-3 py-2.5 text-xs font-medium text-indigo-600 hover:bg-indigo-100 transition-colors w-full text-center"
@@ -155,8 +180,9 @@ function SidebarContent({
             <span>→</span>
             <span>{switchLabel}</span>
           </Link>
-        </div>
-      )}
+        )}
+        {showLogout && <LogoutButton />}
+      </div>
     </div>
   );
 }
@@ -167,6 +193,7 @@ export function Sidebar({
   userProfile,
   switchUrl,
   switchLabel,
+  showLogout,
 }: SidebarProps) {
   const pathname = usePathname();
 
@@ -180,6 +207,7 @@ export function Sidebar({
           userProfile={userProfile}
           switchUrl={switchUrl}
           switchLabel={switchLabel}
+          showLogout={showLogout}
           pathname={pathname}
         />
       </aside>
@@ -197,6 +225,7 @@ export function Sidebar({
               userProfile={userProfile}
               switchUrl={switchUrl}
               switchLabel={switchLabel}
+              showLogout={showLogout}
               pathname={pathname}
             />
           </SheetContent>
