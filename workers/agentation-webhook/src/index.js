@@ -139,33 +139,28 @@ async function handleEvent(payload, env) {
 // GITHUB API
 // ============================================================
 async function createGitHubIssue(env, repo, { title, body, labels }) {
+  // Ensure all labels exist before creating the issue
+  await ensureLabelsExist(env, repo, labels);
+
   const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-      "Content-Type": "application/json",
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": "agentation-webhook-worker",
-    },
+    headers: githubHeaders(env),
     body: JSON.stringify({ title, body, labels }),
   });
 
   if (!res.ok) {
     const errorText = await res.text();
 
-    // Token expired or invalid
     if (res.status === 401) {
       console.error("GitHub token expired or invalid. Rotate the token.");
       throw new Error("GitHub authentication failed — token may be expired");
     }
 
-    // Rate limited
     if (res.status === 403 && res.headers.get("X-RateLimit-Remaining") === "0") {
       const retryAfter = res.headers.get("Retry-After") || "60";
       throw new RateLimitError(`GitHub rate limit exceeded. Retry after ${retryAfter}s`, retryAfter);
     }
 
-    // Validation error
     if (res.status === 422) {
       throw new Error(`GitHub validation error: ${errorText}`);
     }
@@ -174,6 +169,48 @@ async function createGitHubIssue(env, repo, { title, body, labels }) {
   }
 
   return res.json();
+}
+
+// Auto-create missing labels on the GitHub repo
+async function ensureLabelsExist(env, repo, labels) {
+  const unique = [...new Set(labels)];
+  await Promise.all(unique.map((label) => createLabelIfMissing(env, repo, label)));
+}
+
+async function createLabelIfMissing(env, repo, label) {
+  // Check if label exists (GET returns 404 if not)
+  const check = await fetch(
+    `https://api.github.com/repos/${repo}/labels/${encodeURIComponent(label)}`,
+    { headers: githubHeaders(env) },
+  );
+
+  if (check.status === 200) return; // already exists
+
+  if (check.status === 404) {
+    // Create the label with a random color
+    const color = Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, "0");
+    const res = await fetch(`https://api.github.com/repos/${repo}/labels`, {
+      method: "POST",
+      headers: githubHeaders(env),
+      body: JSON.stringify({ name: label, color }),
+    });
+
+    if (res.ok) {
+      console.log(`Created label: "${label}" (#${color})`);
+    } else if (res.status !== 422) {
+      // 422 = label already exists (race condition), safe to ignore
+      console.error(`Failed to create label "${label}": ${res.status}`);
+    }
+  }
+}
+
+function githubHeaders(env) {
+  return {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    "Content-Type": "application/json",
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "agentation-webhook-worker",
+  };
 }
 
 class RateLimitError extends Error {
