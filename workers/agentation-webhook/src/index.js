@@ -6,8 +6,10 @@ const DOMAIN_TO_REPO = {
   "localhost": "sangndse192/vbpsplatform",
   "127.0.0.1": "sangndse192/vbpsplatform",
   "0.0.0.0": "sangndse192/vbpsplatform",
+  // Vercel preview deployments
+  "vbpsplatform.vercel.app": "sangndse192/vbpsplatform",
   // Add production domains as deployed:
-  // "dev.vbsp.9stack.vn": "sangnd-tf/vbspPlatfrom",
+  // "dev.vbsp.9stack.vn": "sangndse192/vbpsplatform",
 };
 
 // Allowed CORS origins (restrict to known domains)
@@ -16,6 +18,7 @@ const ALLOWED_ORIGINS = [
   /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
   /^https?:\/\/0\.0\.0\.0(:\d+)?$/,
   /^https:\/\/(dev|staging|app)\.[a-z]+\.9stack\.vn$/,
+  /^https:\/\/vbpsplatform.*\.vercel\.app$/,
 ];
 
 // ============================================================
