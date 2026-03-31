@@ -13,7 +13,7 @@ export default async function AdminDashboard() {
 
     return (
       <div className="space-y-6">
-        <h1 className="text-[17px] font-extrabold text-slate-800">Dashboard Tổng quan</h1>
+        <h1 className="text-[17px] font-extrabold text-slate-800">Dashboard</h1>
 
         <DashboardStatCards
           totalDocs={stats.totalDocs}
@@ -31,7 +31,7 @@ export default async function AdminDashboard() {
   } catch {
     return (
       <div className="space-y-6">
-        <h1 className="text-[17px] font-extrabold text-slate-800">Dashboard Tổng quan</h1>
+        <h1 className="text-[17px] font-extrabold text-slate-800">Dashboard</h1>
         <DashboardStatCards totalDocs={0} totalViews={0} totalComments={0} branchCount={0} />
         <div className="grid gap-6 lg:grid-cols-2">
           <BranchViewsChart data={[]} />
